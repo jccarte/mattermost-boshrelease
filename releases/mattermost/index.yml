@@ -63,6 +63,8 @@ builds:
     version: 6.4.0
   cb6331e1-b2e7-483c-4e96-bfeaf4fe7fab:
     version: 6.3.4
+  d4613110-63a4-44dd-41f0-074a09a5fd7f:
+    version: 8.1.0
   d89aa368-f1c8-4590-b986-d3a822f62edc:
     version: "5"
   d8f55349-ab0f-48c0-4336-a61debb2332f:
