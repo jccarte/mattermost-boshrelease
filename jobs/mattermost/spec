@@ -215,6 +215,9 @@ properties:
   mattermost.ServiceSettings.CorsDebug:
     default: false
     description: Provides ability to print messages to the logs to help when developing an integration that uses CORS.
+  mattermost.ServiceSettings.EnableBotAccountCreation:
+    default: false
+    description: Bot accounts access the RESTful API on behalf of a bot through the use of the personal access tokens feature.
 
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...

@@ -87,7 +87,8 @@
         "GfycatApiSecret": "<%= p("mattermost.ServiceSettings.GfycatApiSecret") %>",
         "CorsExposedHeaders": "<%= p("mattermost.ServiceSettings.CorsExposedHeaders") %>",
         "CorsAllowCredentials": "<%= p("mattermost.ServiceSettings.CorsAllowCredentials") %>",
-        "CorsDebug": "<%= p("mattermost.ServiceSettings.CorsDebug") %>"
+        "CorsDebug": "<%= p("mattermost.ServiceSettings.CorsDebug") %>",
+        "EnableBotAccountCreation": "<%= p("mattermost.ServiceSettings.EnableBotAccountCreation") %>"
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -390,7 +391,7 @@
     "PluginSettings": {
         "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
         "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
-        "Directory": "/var/vcap/store/mattermost/client/plugins",
+        "Directory": "/var/vcap/store/mattermost/plugins",
         "PluginStates": <%= JSON.pretty_generate(p("mattermost.PluginSettings.PluginStates")) %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>

@@ -1,6 +1,7 @@
 ---
 blobstore:
-  provider: s3
+  provider: gcs
   options:
-    bucket_name: mattermost-boshrelease
+    bucket_name: trhc-mattermost-boshrelease
 final_name: mattermost
+
