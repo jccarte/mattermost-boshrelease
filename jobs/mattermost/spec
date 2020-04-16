@@ -218,6 +218,9 @@ properties:
   mattermost.ServiceSettings.EnableBotAccountCreation:
     default: false
     description: Bot accounts access the RESTful API on behalf of a bot through the use of the personal access tokens feature.
+  mattermost.ServiceSettings.EnableLatex:
+    default: false
+    description: Added EnableLatex to add an option to enable/disable rendering of latex code.
 
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -670,7 +673,7 @@ properties:
 
   mattermost.NativeAppSettings.AppDownloadLink:
     description: Configurable link to a download page for Mattermost Apps.
-    default: "https://about.mattermost.com/downloads/"
+    default: "https://mattermost.com/download/#mattermostApps"
   mattermost.NativeAppSettings.AndroidAppDownloadLink:
     description: Configurable link to download the Android app.
     default: "https://about.mattermost.com/mattermost-android-app/"
@@ -694,6 +697,12 @@ properties:
     description: Allow users to dismiss the banner after they have read the announcement
     default: true
 
+  mattermost.ClusterSettings.AdvertiseAddress:
+    description: "Cluster Advertise Address"
+    default: ""
+  mattermost.ClusterSettings.BindAddress:
+    description: "Cluster Bind Address"
+    default: ""
   mattermost.ClusterSettings.ClusterName:
     description: The cluster to join by name. Only nodes with the same cluster name will join together. This is to support Blue-Green deployments or staging pointing to the same database.  The deployment name will be used by default.
   mattermost.ClusterSettings.UseIpAddress:
@@ -714,6 +723,9 @@ properties:
   mattermost.ClusterSettings.MaxIdleConnsPerHost:
     description: Maximum number of idle connections held open from one server to another server in the cluster.
     default: 128
+  mattermost.ClusterSettings.NetworkInterface:
+    description: "Cluster network interface"
+    default: ""
   mattermost.ClusterSettings.IdleConnTimeoutMilliseconds:
     description: Number of milliseconds to leave an idle connection open between servers in the cluster.
     default: 90000
@@ -780,6 +792,9 @@ properties:
   mattermost.ElasticsearchSettings.BulkIndexingTimeWindowSeconds:
     description: set the maximum time window for a batch of posts being indexed by the Bulk Indexer
     default: 3600
+  mattermost.ElasticsearchSettings.SkipTLSVerification:
+    description: Skip TLS on ES
+    default: false
 
   mattermost.Plugins.Jira.Enabled:
     description: You can configure JIRA webhooks to post message in Mattermost. To help combat phishing attacks, all posts are labelled by a BOT tag.
@@ -789,9 +804,18 @@ properties:
   mattermost.Plugins.Jira.UserName:
     description: Select the username that this integration is attached to.
 
+  mattermost.PluginSettings.AllowInsecureDownloadUrl:
+    description: allow servers to download and install a plugin from a remote url via the System Console.
+    default: false
   mattermost.PluginSettings.Enable:
     description: If true, plugins are enabled on this server
     default: true
+  mattermost.PluginSettings.EnableMarketplace:
+    description: True to enable Plugin Marketplace feature.
+    default: true
+  mattermost.PluginSettings.MarketplaceUrl:
+    description: Plugin Marketplace URL.
+    default: https://marketplace.integrations.mattermost.com
   mattermost.PluginSettings.EnableUploads:
     description: Allows system administrators to upload new plugins.  Set to false unless you are uploading a plugin
     default: false
@@ -881,3 +905,15 @@ properties:
   mattermost.ExperimentalSettings.LinkMetadataTimeoutMilliseconds:
     default: 5000
     description: "Adds a configurable timeout for requests made to return link metadata. If the metadata is not returned before this timeout expires, the message will post without requiring metadata. This timeout covers the failure cases of broken URLs and bad content types on slow network connections."
+
+  mattermost.GuestAccountsSettings.AllowEmailAccounts:
+    default: true
+  mattermost.GuestAccountsSettings.Enable:
+    description: Enable Guest Account Feature
+    default: false
+  mattermost.GuestAccountsSettings.EnforceMultifactorAuthentication:
+    description: Enforce 2FA for guest accounts.
+    default: false
+  mattermost.GuestAccountsSettings.RestrictCreationToDomains:
+    description: Domain Restriction
+    default: ""
