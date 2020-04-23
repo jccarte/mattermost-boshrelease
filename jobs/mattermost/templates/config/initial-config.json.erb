@@ -342,15 +342,15 @@
     <% if nodes.length > 1 -%>
 
     "ClusterSettings": {
-        "AdvertiseAddress": <%= p("mattermost.ClusterSettings.AdvertiseAddress") %>,
-        "BindAddress": <%= p("mattermost.ClusterSettings.BindAddress") %>,
+        "AdvertiseAddress": "<%= p("mattermost.ClusterSettings.AdvertiseAddress") %>",
+        "BindAddress": "<%= p("mattermost.ClusterSettings.BindAddress") %>",
         "ClusterName": "<%= p("mattermost.ClusterSettings.ClusterName", spec.deployment) %>",
         "Enable": true,
         "GossipPort": <%= p("mattermost.ClusterSettings.GossipPort") %>,
         "IdleConnTimeoutMilliseconds": <%= p("mattermost.ClusterSettings.IdleConnTimeoutMilliseconds") %>,
         "MaxIdleConns": <%= p("mattermost.ClusterSettings.MaxIdleConns") %>,
         "MaxIdleConnsPerHost": <%= p("mattermost.ClusterSettings.MaxIdleConnsPerHost") %>,
-        "NetworkInterface": <%= p("mattermost.ClusterSettings.NetworkInterface") %>,
+        "NetworkInterface": "<%= p("mattermost.ClusterSettings.NetworkInterface") %>",
         "ReadOnlyConfig": true,
         "StreamingPort": <%= p("mattermost.ClusterSettings.StreamingPort") %>,
         "UseExperimentalGossip": <%= p("mattermost.ClusterSettings.UseExperimentalGossip") %>,
