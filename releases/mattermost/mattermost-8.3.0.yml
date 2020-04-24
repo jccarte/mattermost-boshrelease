@@ -1,0 +1,43 @@
+name: mattermost
+version: 8.3.0
+commit_hash: 4267204f1
+uncommitted_changes: false
+jobs:
+- name: load_test
+  version: 7eb75608564ca062cae84ed34e2f2fb268ae68320a4153c098b9062f19154f6d
+  fingerprint: 7eb75608564ca062cae84ed34e2f2fb268ae68320a4153c098b9062f19154f6d
+  sha1: sha256:7ef0085fef65651f01619d8e8976114adc291fa0a425ccdcb989bfe12d63929f
+  packages:
+  - load_test
+- name: mattermost
+  version: 0ef06da02282ed95ad6cc18cd4764054bdeeac5b7518d92ccb7e501f7e2d2723
+  fingerprint: 0ef06da02282ed95ad6cc18cd4764054bdeeac5b7518d92ccb7e501f7e2d2723
+  sha1: sha256:48eb59195cb1166bf028b23efaca1eb19d6dc246bcb8227933f31e5a29054e58
+  packages:
+  - platform
+- name: sanity_test
+  version: e4122349b62927bd255cf12ab81e7855d7768760c974838bb897ace27b49d0f7
+  fingerprint: e4122349b62927bd255cf12ab81e7855d7768760c974838bb897ace27b49d0f7
+  sha1: sha256:2040e2c6e5c88ad66a6e938315eee941c2ca46e40302c064ec11d967b5af9450
+  packages: []
+packages:
+- name: go
+  version: 6621a7376cf69e3d3ab96b8f2b7a679f80a0b3faef4962269ce62739dda4138a
+  fingerprint: 6621a7376cf69e3d3ab96b8f2b7a679f80a0b3faef4962269ce62739dda4138a
+  sha1: sha256:e1c8019acfcd3b771b5599745926747b0f594a9408ee58914cd206198ec57282
+  dependencies: []
+- name: load_test
+  version: cc01bc8e87256022f003fdd88aa89a2df6004583c94370f747fdb4d7d876d658
+  fingerprint: cc01bc8e87256022f003fdd88aa89a2df6004583c94370f747fdb4d7d876d658
+  sha1: sha256:635df716b316acb0f213e3accfd1ee68dbfb580c9cf54df86fb15a47489c422d
+  dependencies:
+  - go
+- name: platform
+  version: 88028290ef193aa99deb36124e051e79ea35b688ad8b7ec185726c152c7ca914
+  fingerprint: 88028290ef193aa99deb36124e051e79ea35b688ad8b7ec185726c152c7ca914
+  sha1: sha256:502e4a2e4f737d71cd6fc49397ee2bd2c1b8656635ef47e0e0f69fd5f78fd35d
+  dependencies: []
+license:
+  version: fa396e9fc1c17598843bc4c7d2b8d9c10ae591590e14f840822146ad8117ff8f
+  fingerprint: fa396e9fc1c17598843bc4c7d2b8d9c10ae591590e14f840822146ad8117ff8f
+  sha1: sha256:6c557af13a9db4688b7996eccca157c839dcdde5e6bcd076c204fa8dd3eca4d9
