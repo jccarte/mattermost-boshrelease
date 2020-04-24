@@ -1,11 +1,17 @@
 go/go1.8.3.linux-amd64.tar.gz:
   size: 90029041
-  object_id: 0a1c26d6-d8d3-485d-581f-3413476f6179
-  sha: 838c415896ef5ecd395dfabde5e7e6f8ac943c8e
+  object_id: f46a7c71-3fc6-407a-691c-d475da3528e7
+  sha: sha256:1862f4c3d3907e59b04a757cfda0ea7aa9ef39274af99a784f5be843c80c6772
 mattermost/load-test-5.11.0.tar.gz:
   size: 8548641
-  object_id: 9b92aeae-621d-4032-45f9-85e45e13a7f8
+  object_id: 76f3f8da-bb7a-4d34-77e8-588e4e900dd8
   sha: sha256:847d89061dee08e9bc6fda9c83bb93bc1c4dbde85fce1a4f524444c79bfe7fb3
-mattermost/mattermost-5.17.3-linux-amd64.tar.gz:
-  size: 154936858
-  sha: sha256:5b02c4e6c6c5735191bbdf46ee9af5aa08f2002e4b41d5ffb7cc39b4c838fadc
+mattermost/load-test-5.12.0.tar.gz:
+  size: 8691261
+  sha: sha256:af06aa7420d323504adae3e8106e51c375cf9ad97afd96c5599e413fc7ba87ec
+mattermost/mattermost-5.22.1-linux-amd64.tar.gz:
+  size: 168334037
+  sha: sha256:f4387c393ed70a6674aa30e06ab832d2ef9878110f089e07319a4e314f625acd
+mattermost/mattermost-oad-test-5.12.0.tar.gz:
+  size: 8691261
+  sha: sha256:af06aa7420d323504adae3e8106e51c375cf9ad97afd96c5599e413fc7ba87ec

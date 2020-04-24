@@ -35,6 +35,9 @@ properties:
   mattermost.ServiceSettings.ListenAddress:
     description: "The address and port to which to bind and listen. Specifying “:8065” will bind to all network interfaces. Specifying 127.0.0.1:8065 will only bind to the network interface having that IP address."
     default: ":8605"
+  mattermost.ServiceSettings.LockTeammateNameDisplay:
+    description:  Allows System Admins to control Teammate Name Display at the system level.
+    default: false
   mattermost.ServiceSettings.ConnectionSecurity:
     description: "Controls whether MM itself does TLS termination (set to \"TLS\" to get SSL termination) NOTE: TLSCertFile and TLSKeyFile must be set if this setting is \"TLS\""
     default: ""
@@ -110,6 +113,9 @@ properties:
   mattermost.ServiceSettings.EnableSecurityFixAlert:
     description: Enable System Admins to be notified by email if a relevant security fix alert is announced. (true|false)
     default: true
+  mattermost.ServiceSettings.EnableOpenTracing:
+    description: A Jaeger client is instantiated and is used to trace each HTTP request as it goes through App and Store layers.
+    default: false
   mattermost.ServiceSettings.EnableIncomingWebhooks:
     description: Developers building integrations can create webhook URLs for public channels and private channels.
     default: true
@@ -173,6 +179,9 @@ properties:
   mattermost.ServiceSettings.EnablePreviewFeatures:
     description: Enable the pre-release features menue in the account settings menu
     default: true
+  mattermost.ServiceSettings.ExperimentalChannelSidebarOrganization:
+    description: Includes options for grouping unread channels, sorting channels by most recent post and combining all channel types into a single list.
+    default: false
   mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer:
     description: Users can change their sign-in method to any that is enabled on the server
     default: true
@@ -578,9 +587,17 @@ properties:
   mattermost.EmailSettings.EnablePreviewModeBanner:
     default: true
     description: Allows Preview Mode banner to be displayed so users are aware that email notifications are disabled.
-
   mattermost.LdapSettings.Enable:
     description: Mattermost allows login using AD/LDAP or Active Directory. (true|false)
+    default: false
+  mattermost.LdapSettings.AdminFilter:
+    decription: Enter a filter to use for designating the System Admin role to users.
+    default: ""
+  mattermost.LdapSettings.GuestFilter:
+    decription: Enter an AD/LDAP Filter to use when searching for external users who have Guest Access to Mattermost.
+    default: ""
+  mattermost.LdapSettings.EnableAdminFilter:
+    decription: Enter a filter to use for designating the System Admin role to users.
     default: false
   mattermost.LdapSettings.LdapServer:
     description: The domain or IP address of the AD/LDAP server.
@@ -739,18 +756,15 @@ properties:
   mattermost.MetricsSettings.ListenAddress:
     description: The address the Mattermost server will listen on to expose performance metrics.
     default: ":8067"
-
   mattermost.AnalyticsSettings.MaxUsersForStatistics:
     description: Sets the maximum number of users on the server before statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled.
     default: 2500
-
   mattermost.JobSettings.RunJobs:
     description: enable running jobs on the job server
     default: true
   mattermost.JobSettings.RunScheduler:
     description: enable scheduling jobs on the job server
     default: true
-
   mattermost.ElasticsearchSettings.ConnectionUrl:
     description: Url for the elasticsearch server
   mattermost.ElasticsearchSettings.Username:
@@ -822,6 +836,18 @@ properties:
   mattermost.PluginSettings.PluginStates:
     description: set whether an installed plugin is active or not
     default: {}
+  mattermost.PluginSettings.EnableRemoteMarketplace:
+    description: Enables Remote Marketplace
+    default: true
+  mattermost.PluginSettings.AutomaticPrepackagedPlugins:
+    description: Any pre-packaged plugins enabled in the configuration will be installed or upgraded automatically. 
+    default: true
+  mattermost.PluginSettings.RequirePluginSignature:
+    description: Require valid plugin signatures before starting managed or unmanaged plugins.
+    default: false
+  mattermost.PluginSettings.SignaturePublicKeyFiles:
+    description: In addition to the Mattermost plugin signing key built-into the server, each public key specified here is trusted to validate plugin signatures.
+    default: []
 
   mattermost.ImageProxySettings.Enable:
     description: When true, enables an image proxy for loading external images. The image proxy is used by the Mattermost apps to prevent them from connecting directly to remote servers. This anonymizes their connections and prevents them from accessing insecure content.
@@ -905,7 +931,9 @@ properties:
   mattermost.ExperimentalSettings.LinkMetadataTimeoutMilliseconds:
     default: 5000
     description: "Adds a configurable timeout for requests made to return link metadata. If the metadata is not returned before this timeout expires, the message will post without requiring metadata. This timeout covers the failure cases of broken URLs and bad content types on slow network connections."
-
+  mattermost.ExperimentalSettings.UseNewSAMLLibrary:
+    default: false
+    description: Enable an updated SAML Library, which does not require the XML Security Library (xmlsec1) to be installed.
   mattermost.GuestAccountsSettings.AllowEmailAccounts:
     default: true
   mattermost.GuestAccountsSettings.Enable:

@@ -43,6 +43,7 @@
         "EnableMultifactorAuthentication": <%= p("mattermost.ServiceSettings.EnableMultifactorAuthentication") %>,
         "EnableOAuthServiceProvider": <%= p("mattermost.ServiceSettings.EnableOAuthServiceProvider") %>,
         "EnableOnlyAdminIntegrations": <%= p("mattermost.ServiceSettings.EnableOnlyAdminIntegrations") %>,
+	"EnableOpenTracing": <%= p("mattermost.ServiceSettings.EnableOpenTracing") %>,
         "EnableOutgoingWebhooks": <%= p("mattermost.ServiceSettings.EnableOutgoingWebhooks") %>,
         "EnablePostIconOverride": <%= p("mattermost.ServiceSettings.EnablePostIconOverride") %>,
         "EnablePostSearch": true,
@@ -55,6 +56,7 @@
         "EnableUserStatuses": true,
         "EnableUserTypingMessages": true,
         "EnforceMultifactorAuthentication": <%= p("mattermost.ServiceSettings.EnforceMultifactorAuthentication") %>,
+	"ExperimentalChannelSidebarOrganization": "<%= p("mattermost.ServiceSettings.ExperimentalChannelSidebarOrganization") %>",
         "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>,
         "ExperimentalEnableDefaultChannelLeaveJoinMessages":  <%= p("mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages") %>,
         "ExperimentalEnableHardenedMode": <%= p("mattermost.ServiceSettings.ExperimentalEnableHardenedMode") %>,
@@ -64,9 +66,11 @@
         "GfycatApiSecret": "<%= p("mattermost.ServiceSettings.GfycatApiSecret") %>",
         "GoogleDeveloperKey": "<%= p("mattermost.ServiceSettings.GoogleDeveloperKey") %>",
         "GoroutineHealthThreshold": <%= p("mattermost.ServiceSettings.GoroutineHealthThreshold") %>,
+	"IdleTimeout": 60,
         "LetsEncryptCertificateCacheFile": "./config/letsencrypt.cache",
         "LicenseFileLocation": "<%= p("mattermost.License") == "" ? "" : "/var/vcap/jobs/mattermost/config/license" %>",
         "ListenAddress": "<%= p("mattermost.ServiceSettings.ListenAddress") %>",
+	"LockTeammateNameDisplay": "<%= p("mattermost.ServiceSettings.LockTeammateNameDisplay") %>",
         "MaximumLoginAttempts": <%= p("mattermost.ServiceSettings.MaximumLoginAttempts") %>,
         "PostEditTimeLimit": <%= p("mattermost.ServiceSettings.PostEditTimeLimit") %>,
         "ReadTimeout": 300,
@@ -191,6 +195,7 @@
         "SMTPUsername": "<%= p("mattermost.EmailSettings.SMTPUsername") %>",
         "SMTPPassword": "<%= p("mattermost.EmailSettings.SMTPPassword") %>",
         "SMTPServer": "<%= p("mattermost.EmailSettings.SMTPServer") %>",
+	"SMTPServerTimeout": 10,
         "SMTPPort": "<%= p("mattermost.EmailSettings.SMTPPort") %>",
         "ConnectionSecurity": "<%= p("mattermost.EmailSettings.ConnectionSecurity") %>",
         "InviteSalt": "<%= p("mattermost.EmailSettings.InviteSalt") %>",
@@ -251,6 +256,7 @@
     },
     "Office365Settings": {
         "Enable": false,
+	"DirectoryId": "",
         "Secret": "",
         "Id": "",
         "Scope": "User.Read",
@@ -260,6 +266,9 @@
     },
     <% if p("mattermost.LdapSettings.Enable") %>
     "LdapSettings": {
+        "AdminFilter": "<%= p("mattermost.LdapSettings.AdminFilter") %>",
+        "GuestFilter": "<%= p("mattermost.LdapSettings.GuestFilter") %>",
+        "EnableAdminFilter": "<%= p("mattermost.LdapSettings.EnableAdminFilter") %>",
         "Enable": <%= p("mattermost.LdapSettings.Enable") %>,
         "LdapServer": "<%= p("mattermost.LdapSettings.LdapServer") %>",
         "LdapPort": <%= p("mattermost.LdapSettings.LdapPort") %>,
@@ -307,6 +316,7 @@
         "Encrypt": true,
         "IdpUrl": "",
         "IdpDescriptorUrl": "",
+	"IdpMetadataUrl": "",
         "AssertionConsumerServiceURL": "",
         "IdpCertificateFile": "",
         "PublicCertificateFile": "",
@@ -319,6 +329,11 @@
         "LocaleAttribute": "",
         "PositionAttribute": "",
         "LoginButtonText": "With SAML",
+	"SignatureAlgorithm": "RSAwithSHA1",
+        "CanonicalAlgorithm": "Canonical1.0",
+	"GuestAttribute": "",
+        "EnableAdminAttribute": false,
+        "AdminAttribute": "",
         "ScopingIDPProviderId": "",
         "ScopingIDPName": "",
         "EnableSyncWithLdapIncludeAuth": false,
@@ -402,10 +417,13 @@
     },
     "PluginSettings": {
         "AllowInsecureDownloadUrl": <%= p("mattermost.PluginSettings.AllowInsecureDownloadUrl") %>,
+	"AutomaticPrepackagedPlugins": <%= p("mattermost.PluginSettings.AutomaticPrepackagedPlugins") %>,
+	"ClientDirectory": "/var/vcap/store/mattermost/client/plugins",
         "Directory": "/var/vcap/store/mattermost/plugins",
         "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
         "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
         "EnableMarketplace": <%= p("mattermost.PluginSettings.EnableMarketplace") %>,
+	"EnableRemoteMarketplace": <%= p("mattermost.PluginSettings.EnableRemoteMarketplace") %>,
         "PluginStates": <%= JSON.pretty_generate(p("mattermost.PluginSettings.PluginStates")) %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>
@@ -418,7 +436,9 @@
             }
         <%- end -%>
         },
-        "ClientDirectory": "/var/vcap/store/mattermost/client/plugins"
+	"MarketplaceUrl": "https://api.integrations.mattermost.com",
+        "RequirePluginSignature": <%= p("mattermost.PluginSettings.RequirePluginSignature") %>,
+        "SignaturePublicKeyFiles": <%= p("mattermost.PluginSettings.SignaturePublicKeyFiles") %>
     },
     "ImageProxySettings": {
         "Enable": <%= p("mattermost.ImageProxySettings.Enable") %>,
@@ -458,6 +478,23 @@
         "ClientSideCertEnable": <%= p("mattermost.ExperimentalSettings.ClientSideCertEnable") %>,
         "ClientSideCertCheck": "<%= p("mattermost.ExperimentalSettings.ClientSideCertCheck") %>",
         "DisablePostMetadata": <%= p("mattermost.ExperimentalSettings.DisablePostMetadata") %>,
-        "LinkMetadataTimeoutMilliseconds": <%= p("mattermost.ExperimentalSettings.LinkMetadataTimeoutMilliseconds") %>
+        "LinkMetadataTimeoutMilliseconds": <%= p("mattermost.ExperimentalSettings.LinkMetadataTimeoutMilliseconds") %>,
+        "UseNewSAMLLibrary": <%= p("mattermost.ExperimentalSettings.UseNewSAMLLibrary") %>
+    },
+    "ExperimentalAuditSettings": {
+        "SysLogEnabled": false,
+        "SysLogIP": "localhost",
+        "SysLogPort": 6514,
+        "SysLogTag": "",
+        "SysLogCert": "",
+        "SysLogInsecure": false,
+        "SysLogMaxQueueSize": 1000,
+        "FileEnabled": false,
+        "FileName": "",
+        "FileMaxSizeMB": 100,
+        "FileMaxAgeDays": 0,
+        "FileMaxBackups": 0,
+        "FileCompress": false,
+        "FileMaxQueueSize": 1000
     }
 }
