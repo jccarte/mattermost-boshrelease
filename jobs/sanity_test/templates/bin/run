@@ -8,6 +8,7 @@ set -u # report the usage of uninitialized variables
 ############################################################################
 
 # put your errand steps here...
+echo HERE
 
 export siteurl="<%= p('mattermost.ServiceSettings.SiteURL') %>"
 
